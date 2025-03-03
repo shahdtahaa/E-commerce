@@ -1,0 +1,40 @@
+@if (wishlistProducts != null) {
+<section class="bg-slate-100 p-4 my-4  mx-auto rounded-md shadow-md w-[80%]">
+  <h1 class="  text-center text-2xl text-emerald-600 my-3">My Wish List:</h1>
+
+  <div class="container w-[90%] mx-auto">
+    @for ( product of wishlistProducts; track product._id) {
+    <div class="flex flex-wrap justify-between items-center border-b-2 py-1 border-gray-300">
+
+      <div class="w-full sm:w-1/4">
+        <div class="p-img">
+          <img src="{{ product.imageCover }}" class="w-[60%] object-contain" alt="{{ product.title }}">
+        </div>
+      </div>
+
+      <div class="w-full sm:w-1/2">
+        <div class="p-desc">
+          <h1 class=" text-2xl font-black my-3">{{product.title}}</h1>
+          <h2 class="font-extrabold">{{product.category.name }}</h2>
+          <h3>{{product.brand.slug}}</h3>
+          <h2 class="font-black  my-3">
+            Price: <span class="text-emerald-400"> {{ product.price | currency: 'GBP' }}</span>
+          </h2>
+          <h4 (click)="deleteItemFromWishlist(product._id)"
+            class="text-red-600 cursor-pointer my-3 hover:text-red-800  transition duration-500">
+            <span><i class="fa-solid fa-trash"></i></span> Remove
+          </h4>
+        </div>
+      </div>
+
+      <div class="w-full sm:w-1/5">
+        <button class="my-btn" (click)="addToCart(product._id)">Add to Cart</button>
+      </div>
+    </div>
+    }
+    @if (wishlistProducts.length === 0) {
+    <p class="flex flex-wrap justify-center text-gray-700 text-2xl">Your wishlist is empty!</p>
+    }
+  </div>
+</section>
+}

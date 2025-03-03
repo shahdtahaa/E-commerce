@@ -1,0 +1,19 @@
+<section class=" p-4 my-4 mx-auto rounded-md shadow-md w-[90%]">
+    <h1 class="main-style-header">All Categories</h1>
+    <div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        @for (item of categoriesData ; track item._id) {
+        <div
+            class="max-w-sm bg-slate-100 border border-slate-100 rounded-lg shadow-sm my-card">
+            <a [routerLink]="['/categories', item._id]" class="block" >
+                <img class="rounded-t-lg h-[80%] w-full" [src]="item.image" [alt]="item.name" />
+            </a>
+            <div class="p-5">
+                <h1 class="text-center font-bold my-2 text-xl">{{ item.slug }}</h1>
+            </div>
+        </div>
+        }
+    </div>
+
+</section>
+
+

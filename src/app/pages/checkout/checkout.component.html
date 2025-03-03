@@ -1,0 +1,51 @@
+<section class="w-1/2 mx-auto bg-slate-100 p-4 my-3 rounded-md relative">
+
+    <form [formGroup]="detailsForm" (ngSubmit)="detailsSubmit()">
+
+        <div class="my-3">
+            @let details = detailsForm.get('email');
+            <label for="details" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">details
+            </label>
+            <input [class]="{
+            'my-valid':!details?.errors && (details?.touched || details?.dirty),
+            'my-invalid': details?.errors && (details?.touched || details?.dirty) }" type="text" id="details"
+                formControlName="details"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+
+        </div>
+
+        <div class="my-3">
+            @let phone = detailsForm.get('phone');
+            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">phone
+            </label>
+            <input [class]="{
+            'my-valid':!phone?.errors && (phone?.touched || phone?.dirty),
+            'my-invalid': phone?.errors && (phone?.touched || phone?.dirty) }" type="tel" id="phone"
+                formControlName="phone"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+
+        </div>
+
+
+        <div class="my-3">
+            @let city = detailsForm.get('city');
+            <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">city
+            </label>
+            <input [class]="{
+            'my-valid':!city?.errors && (city?.touched || city?.dirty),
+            'my-invalid': city?.errors && (city?.touched || city?.dirty) }" type="text" id="city"
+                formControlName="city"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+
+        </div>
+
+
+        <div>
+            <button class="my-btn">Payment <span><i class="fa-brands fa-cc-visa"></i></span> </button>
+        </div>
+
+
+    </form>
+
+
+</section>
