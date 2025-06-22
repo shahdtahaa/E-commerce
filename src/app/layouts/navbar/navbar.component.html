@@ -1,77 +1,75 @@
-<nav class="bg-gray-100  border-gray-200 dark:bg-gray-900">
-    <div class="max-w-[95%] mx-auto flex flex-wrap items-center justify-between py-2 px-3">
-      <a  class="flex items-center space-x-3 rtl:space-x-reverse md:w-[10%]">
-          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            <img src="./images/freshcart-logo.svg" alt="">
-          </span>
-      </a>
-      <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <span aria-hidden="true"  fill="none" viewBox="0 0 17 14">
-            <i class="fa-solid fa-sliders"></i>
-          </span>
-      </button>
-      <div class="hidden w-full md:flex md:justify-between md:w-[90%]" id="navbar-default">
-        <ul class="font-medium p-4 mt-3 flex flex-col md:flex-row md:mt-0 rounded-lg">
-         
-          <li>
-            <a class="block py-2 px-3 rounded-md" routerLink="home" routerLinkActive="bg-emerald-400 text-white">Home</a>
-          </li>
-          <li>
-            <a class="block py-2 px-3 rounded-md" routerLink="products" routerLinkActive="bg-emerald-400 text-white">Products</a>
-          </li>
-          <li>
-            <a class="block py-2 px-3 rounded-md" routerLink="wishlist" routerLinkActive="bg-emerald-400 text-white">Wishlist</a>
-          </li>
-          <li>
-            <a class="block py-2 px-3 rounded-md" routerLink="categories" routerLinkActive="bg-emerald-400 text-white">Categories</a>
-          </li>
-          <li>
-            <a class="block py-2 px-3 rounded-md" routerLink="brands" routerLinkActive="bg-emerald-400 text-white">Brands</a>
-          </li>
-        </ul>
+<nav class="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+  <div class="max-w-[95%] mx-auto flex flex-wrap items-center justify-between py-4 px-3">
 
-        <ul class="font-medium p-4 mt-3 flex flex-col md:flex-row md:mt-0 rounded-lg">
-         
-          <div class="sm:flex sm:flex-row">
-            <a routerLink="/cart" class=" relative text-3xl py-2 px-1 sm:max-md:px-7 text-slate-500 hover:text-emerald-400 hover:cursor-pointer transition-colors duration-500 rounded-ful">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <span class=" absolute top-0 left-0 bg-emerald-300 text-center rounded-sm p-1 text-xs">{{navCartCount}}</span>
-            </a>
+    <!-- Logo -->
+    <a class="flex items-center md:w-[10%]">
+      <img src="./images/freshcart-logo.svg" alt="Logo" class="h-8 w-auto" />
+    </a>
 
-            <a class=" py-2 px-1 sm:max-md:px-7 text-slate-500 hover:text-emerald-400 hover:cursor-pointer transition-colors duration-500 rounded-ful">
-              <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a class=" py-2 px-1 sm:max-md:px-7 text-slate-500 hover:text-emerald-400 hover:cursor-pointer transition-colors duration-500 rounded-ful">
-              <i class="fa-brands fa-twitter"></i>
-            </a>
-            <a class=" py-2 px-1 sm:max-md:px-7 text-slate-500 hover:text-emerald-400 hover:cursor-pointer transition-colors duration-500 rounded-ful">
-              <i class="fa-brands fa-linkedin"></i>
-            </a>
-            <a class=" py-2 px-1 sm:max-md:px-7 text-slate-500 hover:text-emerald-400 hover:cursor-pointer transition-colors duration-500 rounded-ful">
-              <i class="fa-brands fa-youtube"></i>
-            </a>
-            <a class=" py-2 px-1 sm:max-md:px-7 text-slate-500 hover:text-emerald-400 hover:cursor-pointer transition-colors duration-500 rounded-ful">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a class=" py-2 px-1 sm:max-md:px-7 text-slate-500 hover:text-emerald-400 hover:cursor-pointer transition-colors duration-500 rounded-ful">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-          </div>
-          <li>
-            <a class="block py-2 px-3 rounded-full" routerLink="login" routerLinkActive="bg-green-400 text-white">Login</a>
-          </li>
-          <li>
-            <a class="block py-2 px-3 rounded-full" routerLink="register" routerLinkActive="bg-green-400 text-white">Register</a>
-          </li>
-          <li>
-            <a  (click)="logOut()"  class="block py-2 px-3 rounded-full">Log out</a>
-          </li>
-          
-        </ul>
+    <!-- Mobile Toggle -->
+    <button data-collapse-toggle="navbar-default" type="button"
+      class="md:hidden p-2 text-[#1c1c1e] hover:text-[#d6c7ae] focus:outline-none"
+      aria-controls="navbar-default" aria-expanded="false">
+      <i class="fa-solid fa-bars text-xl"></i>
+    </button>
+
+    <!-- Navigation Links -->
+    <div class="hidden w-full md:flex md:justify-between md:w-[90%]" id="navbar-default">
+
+      <!-- Left Navigation -->
+      @if (isLoggedIn) {
+      <ul class="flex flex-col md:flex-row gap-3 md:gap-6 items-center">
+        <li><a class="nav-link text-[#1c1c1e] hover:text-[#d6c7ae] font-medium px-3 py-1 transition" routerLink="home"
+            routerLinkActive="active-link">Home</a></li>
+        <li><a class="nav-linktext-[#1c1c1e] hover:text-[#d6c7ae] font-medium px-3 py-1 transition" routerLink="products"
+            routerLinkActive="active-link">Products</a></li>
+        <li><a class="nav-link text-[#1c1c1e] hover:text-[#d6c7ae] font-medium px-3 py-1 transition" routerLink="wishlist"
+            routerLinkActive="active-link">Wishlist</a></li>
+        <li><a class="nav-link text-[#1c1c1e] hover:text-[#d6c7ae] font-medium px-3 py-1 transition" routerLink="categories"
+            routerLinkActive="active-link">Categories</a></li>
+        <li><a class="nav-link text-[#1c1c1e] hover:text-[#d6c7ae] font-medium px-3 py-1 transition" routerLink="brands"
+            routerLinkActive="active-link">Brands</a></li>
+      </ul>
+      }
+
+      <!-- Right Icons & Auth -->
+      <div class="flex items-center gap-3 md:gap-4 mt-4 md:mt-0">
+
+        <!-- Cart -->
+        @if (isLoggedIn) {
+        <a routerLink="/cart" class="relative text-xl text-[#1c1c1e] hover:text-[#d6c7ae] transition">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span
+            class="absolute -top-2 -right-2 bg-[#d6c7ae] text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            {{navCartCount}}
+          </span>
+        </a>
+        }
+
+        <!-- Social Icons -->
+        <div class="hidden sm:flex gap-3 text-[#8e8e93] text-lg">
+          <a class="hover:text-[#1c1c1e]" href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a class="hover:text-[#1c1c1e]" href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a class="hover:text-[#1c1c1e]" href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a class="hover:text-[#1c1c1e]" href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a class="hover:text-[#1c1c1e]" href="#"><i class="fa-brands fa-tiktok"></i></a>
+          <a class="hover:text-[#1c1c1e]" href="#"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+
+        <!-- Auth Buttons -->
+        @if (!isLoggedIn) {
+        <a routerLink="login" routerLinkActive="auth-active"
+          class="text-[#1c1c1e] hover:text-[#d6c7ae] font-medium px-3 py-1 transition">Login</a>
+        <a routerLink="register" routerLinkActive="auth-active"
+          class="text-[#1c1c1e] hover:text-[#d6c7ae] font-medium px-3 py-1 transition">Register</a>
+        }
+        @if (isLoggedIn) {
+        <a (click)="logOut()" class="text-red-500 hover:text-red-600 font-medium px-3 py-1 transition">
+          Logout
+        </a>
+        }
+
       </div>
-
-     
     </div>
-  </nav>
-  
+  </div>
+</nav>

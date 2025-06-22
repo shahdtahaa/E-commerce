@@ -15,17 +15,23 @@ export class NavbarComponent implements OnInit {
   private readonly _CartService = inject(CartService);
 
   navCartCount!: number;
+  isLoggedIn: boolean = false;
 
   logOut() {
     sessionStorage.removeItem('token');
     this._AuthService.logOut();
+    this.isLoggedIn = false; // update login state
     this._Router.navigate(['/login']);
   }
 
   ngOnInit(): void {
+    // Determine login state based on token presence
+    this.isLoggedIn = !!sessionStorage.getItem('token');
+
+    // Listen for cart count changes
     this._CartService.cartCount.subscribe({
       next: (value) => {
-        this.navCartCount =value;
+        this.navCartCount = value;
       },
     });
   }

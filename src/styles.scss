@@ -3,7 +3,7 @@
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
 :root {
-  --main-color: #34d399;
+  --main-color: #dccbad;
   --light-color: #f0f3f2;
   --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
     rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
@@ -20,7 +20,7 @@ body {
   transition: unset !important;
 }
 .active-link {
-  background-color: var(--main-color) !important;
+  background-color: black !important;
   color: var(--light-color) !important;
   border-radius: 5px;
 }
@@ -44,7 +44,7 @@ a:hover {
 }
 
 .product:hover {
-  box-shadow: 0 0 10px #059669;
+  box-shadow: 0 0 10px #dccbad;
 }
 
 .my-card{
@@ -53,7 +53,7 @@ a:hover {
   overflow: hidden;
 }
 .my-card:hover{
-  box-shadow: 0 0 10px #059669;
+  box-shadow: 0 0 10px #dccbad;
 }
 
 .font-sm {
@@ -85,7 +85,7 @@ a:hover {
   background-color: #ccc;
 }
 .btn-main:hover {
-  background-color: #059669;
+  background-color: #dccbad;
 }
 
 .main-style-header{
@@ -120,3 +120,66 @@ a:hover {
   left: 50%;
   transform: translateX(50%);
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap');
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.loader-ecom {
+  border: 3px solid white;
+  border-top: 3px solid #c5a880;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+  .nav-link {
+    @apply text-sm text-gray-700 hover:text-black font-medium transition-colors duration-300;
+  }
+  .active-link {
+    @apply bg-black text-white;
+  }
+  .auth-btn {
+    @apply text-sm font-medium px-3 py-1 rounded transition-colors duration-300 hover:bg-gray-100;
+  }
+  .auth-active {
+    @apply bg-black text-white;
+  }
+  @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.6s ease-out both;
+}
+
+

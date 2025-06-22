@@ -13,6 +13,7 @@ import { FooterComponent } from "./layouts/footer/footer.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
+
 export class AppComponent implements OnInit {
   title = 'ecommerce';
   constructor(private flowbiteService: FlowbiteService) {}

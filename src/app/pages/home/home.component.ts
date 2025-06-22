@@ -19,6 +19,7 @@ import { WishlistService } from '../../core/services/wishlist/wishlist.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'], // note: ensure this is "styleUrls"
 })
+
 export class HomeComponent implements OnInit, OnDestroy {
   searchValue: string = '';
   productsData!: IProduct[];

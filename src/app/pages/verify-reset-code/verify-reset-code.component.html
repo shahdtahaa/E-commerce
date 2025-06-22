@@ -1,50 +1,50 @@
-<section class="w-1/2 mx-auto bg-slate-100 p-4 my-3 rounded-md relative">
-    <h1 class="text-emerald-400 font-black font-bold absolute top-5 end-5">Verify Code</h1>
+<section class="min-h-screen flex items-center justify-center bg-[#f9f6f1] px-4">
+  <div class="w-full max-w-md bg-white p-10 rounded-2xl shadow-md border border-gray-200 animate-fade-in">
+    <h2 class="text-3xl font-extrabold text-center text-[#1c1c1e] font-[PlayfairDisplay] tracking-tight">
+      Verify Code
+    </h2>
+    <p class="text-sm text-center text-[#8e8e93] mt-1">Enter the code sent to your email</p>
 
     @if (resText) {
-    <span class="bg-red-300 p-3">{{resText}}</span>
+      <div class="bg-red-100 text-red-700 mt-6 p-3 rounded text-sm text-center">
+        {{ resText }}
+      </div>
     }
 
-    <form [formGroup]="VerifyResetCodeForm" (ngSubmit)="verifyCode()">
-        <!-- Verification Code -->
-        <div class="my-3">
-            @let codeFormControl = VerifyResetCodeForm.get('resetCode');
-            <label for="code" class="block mb-2 text-sm font-medium text-gray-900">Enter Verification Code</label>
-            <input [class]="{
-                'my-valid': !codeFormControl?.errors && (codeFormControl?.touched || codeFormControl?.dirty),
-                'my-invalid': codeFormControl?.errors && (codeFormControl?.touched || codeFormControl?.dirty)
-            }" 
-            type="text" id="code" formControlName="resetCode"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+    <form [formGroup]="VerifyResetCodeForm" (ngSubmit)="verifyCode()" class="mt-8 space-y-6">
+      @let codeFormControl = VerifyResetCodeForm.get('resetCode');
+      <div>
+        <label for="code" class="text-sm text-[#1c1c1e] font-medium">Verification Code</label>
+        <input
+          type="text"
+          id="code"
+          formControlName="resetCode"
+          class="mt-1 w-full bg-[#f9f6f1] text-[#1c1c1e] placeholder-[#8e8e93] border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#d6c7ae]"
+          placeholder="123456"
+        />
+        @if (codeFormControl?.errors && codeFormControl?.touched) {
+          <p class="text-xs text-red-500 mt-1">
+            @if (codeFormControl?.getError('required')) { Code is required. }
+            @if (codeFormControl?.getError('minlength')) { Code must be at least 6 digits. }
+          </p>
+        }
+      </div>
 
-            @if (codeFormControl?.errors && codeFormControl?.touched) {
-            <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 1 1 1 1v4h1a1 1 0 1 1 0 2Z" />
-                </svg>
-                <span class="sr-only">Error</span>
-                <div>
-                    <span class="font-medium">Ensure that these requirements are met:</span>
-                    <ul class="mt-1.5 list-disc list-inside">
-                        @if (codeFormControl?.getError('required')) { 
-                            <li>Code is required</li> 
-                        }
-                        @if (codeFormControl?.getError('minlength')) { 
-                            <li>Code must be at least 6 digits</li> 
-                        }
-                    </ul>
-                </div>
-            </div>
-            }
-        </div>
-
-        <!-- Submit Button -->
-        <button [disabled]="VerifyResetCodeForm.invalid || loading" type="submit" 
-            class="my-btn disabled:bg-slate-400">
-            @if (!loading) { Verify Code }
-            @if (loading) { <span><i class="fa-solid fa-spinner fa-spin"></i></span> }
-        </button>
+      <!-- Button -->
+      <button
+        [disabled]="VerifyResetCodeForm.invalid || loading"
+        type="submit"
+        class="w-full py-3 rounded-md text-white bg-[#d6c7ae] hover:bg-[#c5b58f] font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg disabled:bg-gray-300"
+      >
+        @if (!loading) {
+          <span class="flex items-center justify-center gap-2">
+            Verify Code <i class="fa-solid fa-circle-check"></i>
+          </span>
+        }
+        @if (loading) {
+          <span class="loader-ecom"></span>
+        }
+      </button>
     </form>
+  </div>
 </section>

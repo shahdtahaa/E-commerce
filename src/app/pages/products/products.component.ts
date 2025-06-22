@@ -28,8 +28,8 @@ export class ProductsComponent implements OnInit , OnDestroy {
 
 
   private readonly _WishlistService = inject(WishlistService);
-    private readonly _ProductsService = inject(ProductsService);
-    private readonly _AuthService = inject(AuthService);
+  private readonly _ProductsService = inject(ProductsService);
+  private readonly _AuthService = inject(AuthService);
 
     constructor(private _CartService: CartService, private toastr: ToastrService){}
 

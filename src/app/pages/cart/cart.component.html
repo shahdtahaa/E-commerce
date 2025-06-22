@@ -1,72 +1,85 @@
-@if (cartData!=null) {
-<section class=" bg-slate-100 p-4 my-4  mx-auto rounded-md shadow-md w-[80%]">
-    <div class="flex flex-wrap justify-between">
-        <div class="my-2">
-            <h1 class=" font-black text-4xl text-emerald-500 my-3">Shop cart</h1>
-            <h3>Total price: <span class="text-emerald-500"> {{cartData.totalCartPrice | currency: 'GBP' }} </span></h3>
-        </div>
-        <div class="my-2">
-            @if (cartData.products.length>0) {
-            <div class=" my-2">
-
-                <button   [routerLink]="['/checkout' , cartData._id]" class=" bg-emerald-300 border-emerald-300 rounded-md p-2 w-full">checkout</button>
-
-            </div>
-            }
-
-            <h4>Total number of items: <span class="text-emerald-500">{{ totalItems }}</span></h4>
-        </div>
+@if (cartData != null) {
+<section class="bg-[#f9f6f1] p-6 my-6 mx-auto rounded-md shadow-md w-[90%]">
+  <div class="flex flex-wrap justify-between items-start mb-6">
+    <!-- Cart Summary -->
+    <div class="my-2">
+      <h1 class="font-black text-4xl text-[#1c1c1e] mb-2">Shop Cart</h1>
+      <h3 class="text-lg font-medium">
+        Total price:
+        <span class="text-[#f0c478] font-bold">
+          {{ cartData.totalCartPrice | currency: 'GBP' }}
+        </span>
+      </h3>
     </div>
 
-    <div class="container w-[90%] mx-auto">
-        @for (product of cartData.products; track product.product) {
-
-
-        <div class="flex flex-wrap justify-between items-center border-b-2 py-1 border-gray-300">
-
-            <div class="w-full sm:w-1/5">
-                <div class="p-img">
-                    <img [src]="product.product.imageCover" class="w-[60%] object-contain" alt="">
-                </div>
-            </div>
-
-            <div class="w-full sm:w-[60%]">
-                <div class="p-desc">
-                    <h1 class="font-black text-xl my-3">{{product.product.title}}</h1>
-                    <h3>{{product.product.brand.name}}</h3>
-                    <h2 class="font-black  my-3">Price: <span class="text- text-emerald-500">{{product.price
-                            |currency: 'GBP' }}</span></h2>
-                    <h4 (click)="deleteItemFromCart(product.product._id)"
-                        class="text-red-600 cursor-pointer my-3 hover:text-red-800 transition duration-500">
-                        <span><i class="fa-solid fa-trash"></i></span>Remove
-                    </h4>
-                </div>
-            </div>
-
-            <div class="w-full sm:w-1/5">
-                <div class="count flex flex-wrap justify-between">
-                    <span class="font-black text-xl" (click)="updateCount(product.product._id , product.count +1)"><i
-                            class="fa-solid fa-circle-plus text-2xl text-emerald-500"></i></span>
-                    <h3>{{product.count}}</h3>
-                    @if (product.count>1) { <span class="font-black text-xl"
-                        (click)="updateCount(product.product._id , product.count -1)"><i
-                            class="fa-solid fa-circle-minus text-2xl text-emerald-500"></i></span>
-                    }
-                </div>
-            </div>
-
-
+    <!-- Checkout + Item Count -->
+    <div class="my-2 text-right">
+      @if (cartData.products.length > 0) {
+        <div class="mb-3">
+          <button
+            [routerLink]="['/checkout', cartData._id]"
+            class="bg-[#d6c7ae] hover:bg-[#baa36e] text-white px-4 py-2 rounded-md transition w-full">
+            Checkout
+          </button>
         </div>
-
-
-        }
-        @if (cartData.products.length>0) {
-        <div class="my-3">
-            <button (click)="clearCart()" class="my-btn">Clear your cart</button>
-        </div>
-        }@else {
-        <p class=" flex flex-wrap justify-center text-gray-700 text-2xl">your cart is empty !</p>
-        }
+      }
+      <h4 class="text-base">
+        Total number of items:
+        <span class="text-[#d3b581] font-semibold">{{ totalItems }}</span>
+      </h4>
     </div>
+  </div>
+
+  <!-- Cart Items -->
+  <div class="container w-[90%] mx-auto">
+    @for (product of cartData.products; track product.product) {
+    <div class="flex flex-wrap justify-between items-center border-b border-gray-300 py-4">
+
+      <!-- Image -->
+      <div class="w-full sm:w-1/5 flex justify-center">
+        <img [src]="product.product.imageCover" class="w-24 h-24 object-contain" alt="{{ product.product.title }}" />
+      </div>
+
+      <!-- Product Details -->
+      <div class="w-full sm:w-[60%] px-4">
+        <h1 class="font-bold text-lg text-[#1c1c1e]">{{ product.product.title }}</h1>
+        <h3 class="text-[#8e8e93]">{{ product.product.brand.name }}</h3>
+        <h2 class="mt-2 font-bold text-[#1c1c1e]">
+          Price:
+          <span class="text-[#dcbf8b]">{{ product.price | currency: 'GBP' }}</span>
+        </h2>
+        <h4 (click)="deleteItemFromCart(product.product._id)"
+          class="text-red-500 cursor-pointer mt-3 hover:text-red-700 transition">
+          <i class="fa-solid fa-trash mr-1"></i> Remove
+        </h4>
+      </div>
+
+      <!-- Quantity Controls -->
+      <div class="w-full sm:w-1/5 flex justify-center mt-4 sm:mt-0">
+        <div class="flex items-center gap-4 text-[#1c1c1e]">
+          <span (click)="updateCount(product.product._id, product.count + 1)">
+            <i class="fa-solid fa-circle-plus text-2xl text-[#dcb97d] hover:text-[#bca162] cursor-pointer"></i>
+          </span>
+          <span class="font-medium">{{ product.count }}</span>
+          @if (product.count > 1) {
+          <span (click)="updateCount(product.product._id, product.count - 1)">
+            <i class="fa-solid fa-circle-minus text-2xl text-[#dcb97d] hover:text-[#bca162] cursor-pointer"></i>
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+    }
+
+    <!-- Bottom: Clear Cart or Empty Message -->
+    @if (cartData.products.length > 0) {
+    <div class="mt-6">
+      <button (click)="clearCart()"
+        class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-md transition">Clear your cart</button>
+    </div>
+    } @else {
+    <p class="text-center text-[#8e8e93] text-xl mt-6">Your cart is empty!</p>
+    }
+  </div>
 </section>
 }
